@@ -1,0 +1,17 @@
+rabbitmq-server:
+    image: rabbitmq
+    expose:
+      - 5672
+    command: rabbitmq-server
+
+rest-api:
+    build: ../../rest-api
+    links:
+      - rabbitmq-server
+    expose:
+      - 3000
+
+calculator:
+    build: ../../calculator
+    links:
+      - rabbitmq-server
